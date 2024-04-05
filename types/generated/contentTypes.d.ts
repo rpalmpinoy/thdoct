@@ -788,6 +788,192 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiAppointmentAppointment extends Schema.CollectionType {
+  collectionName: 'appointments';
+  info: {
+    singularName: 'appointment';
+    pluralName: 'appointments';
+    displayName: 'Appointment';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    UserName: Attribute.String;
+    Email: Attribute.Email;
+    Note: Attribute.Blocks;
+    hospital: Attribute.Relation<
+      'api::appointment.appointment',
+      'manyToOne',
+      'api::hospital.hospital'
+    >;
+    Date: Attribute.String;
+    Time: Attribute.String;
+    doctor: Attribute.Relation<
+      'api::appointment.appointment',
+      'oneToOne',
+      'api::doctor.doctor'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::appointment.appointment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::appointment.appointment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCategoryCategory extends Schema.CollectionType {
+  collectionName: 'categories';
+  info: {
+    singularName: 'category';
+    pluralName: 'categories';
+    displayName: 'Category';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String;
+    Icon: Attribute.Media;
+    doctors: Attribute.Relation<
+      'api::category.category',
+      'oneToMany',
+      'api::doctor.doctor'
+    >;
+    hospitals: Attribute.Relation<
+      'api::category.category',
+      'manyToMany',
+      'api::hospital.hospital'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiDoctorDoctor extends Schema.CollectionType {
+  collectionName: 'doctors';
+  info: {
+    singularName: 'doctor';
+    pluralName: 'doctors';
+    displayName: 'Doctor';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String;
+    Address: Attribute.String;
+    Patients: Attribute.String;
+    Years_of_Experience: Attribute.String;
+    StartTime: Attribute.Time;
+    EndTime: Attribute.Time;
+    About: Attribute.Blocks;
+    categories: Attribute.Relation<
+      'api::doctor.doctor',
+      'oneToMany',
+      'api::category.category'
+    >;
+    Phone: Attribute.String;
+    image: Attribute.Media;
+    Premium: Attribute.Boolean;
+    appointments: Attribute.Relation<
+      'api::doctor.doctor',
+      'oneToMany',
+      'api::appointment.appointment'
+    >;
+    email: Attribute.Email;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::doctor.doctor',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::doctor.doctor',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiHospitalHospital extends Schema.CollectionType {
+  collectionName: 'hospitals';
+  info: {
+    singularName: 'hospital';
+    pluralName: 'hospitals';
+    displayName: 'Hospital';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String;
+    Address: Attribute.String;
+    image: Attribute.Media;
+    Email: Attribute.Email;
+    Website: Attribute.String;
+    Phone: Attribute.BigInteger;
+    categories: Attribute.Relation<
+      'api::hospital.hospital',
+      'manyToMany',
+      'api::category.category'
+    >;
+    Description: Attribute.RichText;
+    Premium: Attribute.Boolean;
+    OpeningHours: Attribute.Time;
+    appointments: Attribute.Relation<
+      'api::hospital.hospital',
+      'oneToMany',
+      'api::appointment.appointment'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::hospital.hospital',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::hospital.hospital',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -806,6 +992,10 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::appointment.appointment': ApiAppointmentAppointment;
+      'api::category.category': ApiCategoryCategory;
+      'api::doctor.doctor': ApiDoctorDoctor;
+      'api::hospital.hospital': ApiHospitalHospital;
     }
   }
 }
