@@ -21,7 +21,7 @@
     "Patients": {
       "type": "string"
     },
-    "Years_of_Experience": {
+    "Year_of_Experience": {
       "type": "string"
     },
     "StartTime": {
@@ -29,6 +29,9 @@
     },
     "EndTime": {
       "type": "time"
+    },
+    "About": {
+      "type": "richtext"
     },
     "categories": {
       "type": "relation",
@@ -43,19 +46,11 @@
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+      "allowedTypes": ["images", "files", "videos", "audios"]
     },
     "Premium": {
       "type": "boolean",
       "default": true
-    },
-    "email": {
-      "type": "email"
     },
     "appointments": {
       "type": "relation",
@@ -63,8 +58,8 @@
       "target": "api::appointment.appointment",
       "mappedBy": "doctor"
     },
-    "About": {
-      "type": "richtext"
+    "email": {
+      "type": "email"
     }
   }
 }

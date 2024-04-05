@@ -18,26 +18,26 @@
     "Email": {
       "type": "email"
     },
-    "hospital": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::hospital.hospital",
-      "inversedBy": "appointments"
-    },
     "Date": {
       "type": "string"
     },
     "Time": {
       "type": "string"
     },
+    "hospital": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::hospital.hospital",
+      "inversedBy": "appointments"
+    },
+    "Note": {
+      "type": "richtext"
+    },
     "doctor": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::doctor.doctor",
       "inversedBy": "appointments"
-    },
-    "Note": {
-      "type": "richtext"
     }
   }
 }
