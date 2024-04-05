@@ -35,15 +35,16 @@
     },
     "categories": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::category.category"
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "inversedBy": "doctors"
     },
     "Phone": {
       "type": "string"
     },
     "image": {
       "type": "media",
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "allowedTypes": [
         "images",
@@ -55,13 +56,14 @@
     "Premium": {
       "type": "boolean"
     },
+    "email": {
+      "type": "email"
+    },
     "appointments": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::appointment.appointment"
-    },
-    "email": {
-      "type": "email"
+      "target": "api::appointment.appointment",
+      "mappedBy": "doctor"
     }
   }
 }

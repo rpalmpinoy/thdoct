@@ -35,8 +35,9 @@
     },
     "doctor": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::doctor.doctor"
+      "relation": "manyToOne",
+      "target": "api::doctor.doctor",
+      "inversedBy": "appointments"
     }
   }
 }

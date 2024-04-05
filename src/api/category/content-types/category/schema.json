@@ -17,7 +17,7 @@
     },
     "Icon": {
       "type": "media",
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "allowedTypes": [
         "images",
@@ -26,15 +26,16 @@
         "audios"
       ]
     },
-    "doctors": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::doctor.doctor"
-    },
     "hospitals": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::hospital.hospital",
+      "mappedBy": "categories"
+    },
+    "doctors": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::doctor.doctor",
       "mappedBy": "categories"
     }
   }

@@ -812,7 +812,7 @@ export interface ApiAppointmentAppointment extends Schema.CollectionType {
     Time: Attribute.String;
     doctor: Attribute.Relation<
       'api::appointment.appointment',
-      'oneToOne',
+      'manyToOne',
       'api::doctor.doctor'
     >;
     createdAt: Attribute.DateTime;
@@ -847,15 +847,15 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
   attributes: {
     Name: Attribute.String;
     Icon: Attribute.Media;
-    doctors: Attribute.Relation<
-      'api::category.category',
-      'oneToMany',
-      'api::doctor.doctor'
-    >;
     hospitals: Attribute.Relation<
       'api::category.category',
       'manyToMany',
       'api::hospital.hospital'
+    >;
+    doctors: Attribute.Relation<
+      'api::category.category',
+      'manyToMany',
+      'api::doctor.doctor'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -896,18 +896,18 @@ export interface ApiDoctorDoctor extends Schema.CollectionType {
     About: Attribute.Blocks;
     categories: Attribute.Relation<
       'api::doctor.doctor',
-      'oneToMany',
+      'manyToMany',
       'api::category.category'
     >;
     Phone: Attribute.String;
     image: Attribute.Media;
     Premium: Attribute.Boolean;
+    email: Attribute.Email;
     appointments: Attribute.Relation<
       'api::doctor.doctor',
       'oneToMany',
       'api::appointment.appointment'
     >;
-    email: Attribute.Email;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -932,6 +932,7 @@ export interface ApiHospitalHospital extends Schema.CollectionType {
     singularName: 'hospital';
     pluralName: 'hospitals';
     displayName: 'Hospital';
+    description: '';
   };
   options: {
     draftAndPublish: true;
