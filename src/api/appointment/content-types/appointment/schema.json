@@ -18,9 +18,6 @@
     "Email": {
       "type": "email"
     },
-    "Note": {
-      "type": "blocks"
-    },
     "hospital": {
       "type": "relation",
       "relation": "manyToOne",
@@ -38,6 +35,9 @@
       "relation": "manyToOne",
       "target": "api::doctor.doctor",
       "inversedBy": "appointments"
+    },
+    "Note": {
+      "type": "richtext"
     }
   }
 }

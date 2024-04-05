@@ -30,9 +30,6 @@
     "EndTime": {
       "type": "time"
     },
-    "About": {
-      "type": "blocks"
-    },
     "categories": {
       "type": "relation",
       "relation": "manyToMany",
@@ -54,7 +51,8 @@
       ]
     },
     "Premium": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": true
     },
     "email": {
       "type": "email"
@@ -64,6 +62,9 @@
       "relation": "oneToMany",
       "target": "api::appointment.appointment",
       "mappedBy": "doctor"
+    },
+    "About": {
+      "type": "richtext"
     }
   }
 }

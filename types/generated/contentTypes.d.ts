@@ -802,7 +802,6 @@ export interface ApiAppointmentAppointment extends Schema.CollectionType {
   attributes: {
     UserName: Attribute.String;
     Email: Attribute.Email;
-    Note: Attribute.Blocks;
     hospital: Attribute.Relation<
       'api::appointment.appointment',
       'manyToOne',
@@ -815,6 +814,7 @@ export interface ApiAppointmentAppointment extends Schema.CollectionType {
       'manyToOne',
       'api::doctor.doctor'
     >;
+    Note: Attribute.RichText;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -893,7 +893,6 @@ export interface ApiDoctorDoctor extends Schema.CollectionType {
     Years_of_Experience: Attribute.String;
     StartTime: Attribute.Time;
     EndTime: Attribute.Time;
-    About: Attribute.Blocks;
     categories: Attribute.Relation<
       'api::doctor.doctor',
       'manyToMany',
@@ -901,13 +900,14 @@ export interface ApiDoctorDoctor extends Schema.CollectionType {
     >;
     Phone: Attribute.String;
     image: Attribute.Media;
-    Premium: Attribute.Boolean;
+    Premium: Attribute.Boolean & Attribute.DefaultTo<true>;
     email: Attribute.Email;
     appointments: Attribute.Relation<
       'api::doctor.doctor',
       'oneToMany',
       'api::appointment.appointment'
     >;
+    About: Attribute.RichText;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -943,7 +943,7 @@ export interface ApiHospitalHospital extends Schema.CollectionType {
     image: Attribute.Media;
     Email: Attribute.Email;
     Website: Attribute.String;
-    Phone: Attribute.BigInteger;
+    Phone: Attribute.Integer;
     categories: Attribute.Relation<
       'api::hospital.hospital',
       'manyToMany',
